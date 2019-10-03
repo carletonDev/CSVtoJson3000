@@ -31,9 +31,9 @@ namespace CSVtoJson3000
         {
             foreach(Taxi ride in taxiRides)
             {
-                using(StreamWriter stream = File.AppendText("C:\\Csv\\TaxiRides.json"))
+                using(StreamWriter stream = File.AppendText(jsonPath))
                 {
-                    stream.WriteLine(JsonConvert.SerializeObject(ride));
+                    stream.WriteLine(JsonConvert.SerializeObject("{taxi:["+ride+"]}"));
                 }
             }
         }
