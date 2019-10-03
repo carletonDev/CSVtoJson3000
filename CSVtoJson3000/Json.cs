@@ -30,15 +30,13 @@ namespace CSVtoJson3000
         /// <param name="taxiRides"></param>
         public static void WriteToJson(List<Taxi> taxiRides ,string jsonPath)
         {
-            foreach(Taxi ride in taxiRides)
-            {
+
                 
                 using(StreamWriter stream = File.AppendText(jsonPath))
                 {
                     
-                    stream.WriteLine(JsonConvert.SerializeObject(ride));
+                    stream.WriteLine(JsonConvert.SerializeObject(taxiRides));
                 }
-            }
         }
     }
 }
