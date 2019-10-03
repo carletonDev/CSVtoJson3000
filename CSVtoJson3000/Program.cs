@@ -16,7 +16,7 @@ namespace CSVtoJson3000
             //store csv file into list can change class and path
            List<Taxi> taxi=JsonTaxi.CsvtoClass("C:\\Csv\\Csv.csv");
             //write file to json or store into a databse
-            JsonTaxi.WriteToJson(taxi,"C:\\Csv\\TaxiRides.json");
+            JsonTaxi.WriteToJson(taxi,"C:\\Csv\\Taxi.json");
             Console.WriteLine("Check your file");
             Console.ReadKey();
         }

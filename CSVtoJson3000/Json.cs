@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using CsvHelper;
 using DataAccess;
 using Newtonsoft.Json;
@@ -17,9 +18,9 @@ namespace CSVtoJson3000
         public static List<Taxi> CsvtoClass(string path)
         {
             var dt = DataTable.New.ReadLazy(path);
+            List<Taxi>taxiRide = dt.RowsAs<Taxi>().ToList();
             //can parse to any class of your choice
-           return dt.RowsAs<Taxi>().ToList();
-
+            return taxiRide;
             
         }
 
@@ -31,9 +32,11 @@ namespace CSVtoJson3000
         {
             foreach(Taxi ride in taxiRides)
             {
+                
                 using(StreamWriter stream = File.AppendText(jsonPath))
                 {
-                    stream.WriteLine(JsonConvert.SerializeObject("{taxi:["+ride+"]}"));
+                    
+                    stream.WriteLine(JsonConvert.SerializeObject(ride));
                 }
             }
         }
