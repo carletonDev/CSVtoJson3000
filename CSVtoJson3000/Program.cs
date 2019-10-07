@@ -20,6 +20,10 @@ namespace CSVtoJson3000
             Console.WriteLine("Check file location");
             Console.ReadKey();
         }
+        /// <summary>
+        /// conditional to check answer and perform the write to csv or json
+        /// </summary>
+        /// <param name="answer"></param>
         static void Choice(string answer)
         {
             if (answer == "s")
@@ -32,6 +36,9 @@ namespace CSVtoJson3000
                     
             }
         }
+        /// <summary>
+        /// writes to csv file based on file specified by user
+        /// </summary>
         static void WriteCsvFile()
         {
             string path = GetPath();
@@ -39,6 +46,9 @@ namespace CSVtoJson3000
             path = WriteToPath();
             JsonTaxi.ListToCsv(taxi, path);
         }
+        /// <summary>
+        /// writes to json file based on user csv file path
+        /// </summary>
         static void WriteJsonFile()
         {
             string path = GetPath();
@@ -46,11 +56,19 @@ namespace CSVtoJson3000
             path = WriteToPath();
             JsonTaxi.WriteToJson(taxi, path);
         }
+        /// <summary>
+        /// prompts the user for path
+        /// </summary>
+        /// <returns></returns>
         static string GetPath()
         {
             Console.WriteLine("Enter path to file");
             return Console.ReadLine();
         }
+        /// <summary>
+        /// prompts the user to write to path
+        /// </summary>
+        /// <returns></returns>
         static string WriteToPath()
         {
             Console.WriteLine("Enter path to write file");
