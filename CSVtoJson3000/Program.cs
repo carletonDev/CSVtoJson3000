@@ -43,7 +43,6 @@ namespace CSVtoJson3000
         {
             string path = GetPath();
             List<Taxi> taxi = JsonTaxi.CsvtoClass(path);
-            Console.WriteLine("Enter path to write json file");
             path = WriteToPath();
             JsonTaxi.WriteToJson(taxi, path);
         }
@@ -54,7 +53,7 @@ namespace CSVtoJson3000
         }
         static string WriteToPath()
         {
-            Console.WriteLine("Enter path to write json file");
+            Console.WriteLine("Enter path to write file");
            return Console.ReadLine();
         }
     }
