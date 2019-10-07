@@ -14,10 +14,10 @@ namespace CSVtoJson3000
         static void Main(string[] args)
         {
             //store csv file into list can change class and path
-           List<Taxi> taxi=JsonTaxi.CsvtoClass("C:\\Csv\\Csv.csv");
+            List<Taxi> taxi = JsonTaxi.JsonToList("C:\\Csv\\TaxiRide.json");
+            JsonTaxi.ListToCsv(taxi,"C:\\Csv\\Taxi.csv");
             //write file to json or store into a databse
-            JsonTaxi.WriteToJson(taxi,"C:\\Csv\\TaxiRide.json");
-            Console.WriteLine("Check your file");
+            Console.WriteLine("Check file location");
             Console.ReadKey();
         }
     }

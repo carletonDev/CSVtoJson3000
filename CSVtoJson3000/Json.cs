@@ -24,6 +24,29 @@ namespace CSVtoJson3000
             
         }
 
+      
+
+        public static List<Taxi> JsonToList(string path)
+        {
+            List<Taxi> taxi = new List<Taxi>();
+
+            using (var stream = File.OpenText(path))
+            {
+                StringReader json = new StringReader(stream.ReadToEnd());
+                using (JsonReader jsonReader = new JsonTextReader(json))
+                {
+                 
+                        JsonSerializer serializer = new JsonSerializer();
+                        taxi=serializer.Deserialize<List<Taxi>>(jsonReader);
+                }
+            }
+            return taxi;
+        }
+        public static void ListToCsv(List<Taxi> taxi,string path)
+        {
+            var dt = DataTable.New.FromEnumerable(taxi);
+            dt.SaveCSV(path);
+        }
         /// <summary>
         /// converts a list to a json file
         /// </summary>
