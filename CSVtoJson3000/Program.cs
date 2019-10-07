@@ -28,31 +28,95 @@ namespace CSVtoJson3000
         {
             if (answer == "s")
             {
-                WriteJsonFile();
+                RunWritetoFile(answer);
             }
             else if (answer == "v")
             {
-                WriteCsvFile();
+                RunWritetoFile(answer);
                     
             }
         }
         /// <summary>
+        /// gets a users answer to write to file using specified class in class library to serialize into
+        /// </summary>
+        /// <param name="answer"></param>
+        public static void RunWritetoFile(string answer)
+        {
+
+            if (answer == "v")
+            {
+                ChoiceV();
+            }
+            else if (answer == "s")
+            {
+                ChoiceS();
+            }
+        }
+        /// <summary>
+        /// processes writing json to csv and getting class name to serialize into can add more classes for more explicit conversion
+        /// </summary>
+        public static void ChoiceV()
+        {
+            string className = ClassChoice();
+
+            if (className == "taxi")
+            {
+                WriteCsvFile<Taxi>();
+            }
+            else
+            {
+                WriteCsvFile<string>();
+            }
+        }
+        /// <summary>
+        /// processes writing csv to json and getting class name to serialize into can add more classes for more csv files
+        /// </summary>
+        public static void ChoiceS()
+        {
+            string className = ClassChoice();
+            if (className == "taxi")
+            {
+                WriteJsonFile<Taxi>();
+            }
+            else
+            {
+                WriteJsonFile<string>();
+            }
+        }
+        public static string ClassChoice()
+        {
+            Console.WriteLine("Which class would you like to serialize to?");
+           return Console.ReadLine().ToLower();
+        }
+        /// <summary>
         /// writes to csv file based on file specified by user
         /// </summary>
-        static void WriteCsvFile()
+        static void WriteCsvFile<T>()
         {
+            
             string path = GetPath();
-            List<Taxi> taxi = JsonTaxi.JsonToList(path);
-            path = WriteToPath();
-            JsonTaxi.ListToCsv(taxi, path);
+            List<T> list = new List<T>();
+            Type t = typeof(T);
+            if (t.Name != "String")
+            {
+                list = JsonTaxi.JsonToList<T>(path);
+                path = WriteToPath();
+                JsonTaxi.ListToCsv(list, path);
+            }
+            else
+            {
+                list = JsonTaxi.JsonToList<T>(path);
+                path = WriteToPath();
+                JsonTaxi.ConvertStringToCsV(list, path);
+            }
         }
         /// <summary>
         /// writes to json file based on user csv file path
         /// </summary>
-        static void WriteJsonFile()
+        static void WriteJsonFile<T>()
         {
             string path = GetPath();
-            List<Taxi> taxi = JsonTaxi.CsvtoClass(path);
+            List<T> taxi = JsonTaxi.CsvToList<T>(path);
             path = WriteToPath();
             JsonTaxi.WriteToJson(taxi, path);
         }
