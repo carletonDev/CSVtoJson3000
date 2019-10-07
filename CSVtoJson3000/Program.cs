@@ -13,12 +13,50 @@ namespace CSVtoJson3000
     /// <param name="args"></param>
         static void Main(string[] args)
         {
-            //store csv file into list can change class and path
-            List<Taxi> taxi = JsonTaxi.JsonToList("C:\\Csv\\TaxiRide.json");
-            JsonTaxi.ListToCsv(taxi,"C:\\Csv\\Taxi.csv");
-            //write file to json or store into a databse
+            Console.WriteLine("How would you like to serialize");
+            Console.WriteLine("s is  csv to json v is json to csv");
+            string answer = Console.ReadLine().ToLower();
+            Choice(answer);
             Console.WriteLine("Check file location");
             Console.ReadKey();
         }
+        static void Choice(string answer)
+        {
+            if (answer == "s")
+            {
+                WriteJsonFile();
+            }
+            else if (answer == "v")
+            {
+                WriteCsvFile();
+                    
+            }
+        }
+        static void WriteCsvFile()
+        {
+            string path = GetPath();
+            List<Taxi> taxi = JsonTaxi.JsonToList(path);
+            path = WriteToPath();
+            JsonTaxi.ListToCsv(taxi, path);
+        }
+        static void WriteJsonFile()
+        {
+            string path = GetPath();
+            List<Taxi> taxi = JsonTaxi.CsvtoClass(path);
+            Console.WriteLine("Enter path to write json file");
+            path = WriteToPath();
+            JsonTaxi.WriteToJson(taxi, path);
+        }
+        static string GetPath()
+        {
+            Console.WriteLine("Enter path to file");
+            return Console.ReadLine();
+        }
+        static string WriteToPath()
+        {
+            Console.WriteLine("Enter path to write json file");
+           return Console.ReadLine();
+        }
     }
+  
 }
