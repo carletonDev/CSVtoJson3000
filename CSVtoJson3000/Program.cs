@@ -20,27 +20,12 @@ namespace CSVtoJson3000
             Console.WriteLine("Check file location");
             Console.ReadKey();
         }
-        /// <summary>
-        /// conditional to check answer and perform the write to csv or json
-        /// </summary>
-        /// <param name="answer"></param>
-        static void Choice(string answer)
-        {
-            if (answer == "s")
-            {
-                RunWritetoFile(answer);
-            }
-            else if (answer == "v")
-            {
-                RunWritetoFile(answer);
-                    
-            }
-        }
+        
         /// <summary>
         /// gets a users answer to write to file using specified class in class library to serialize into
         /// </summary>
         /// <param name="answer"></param>
-        public static void RunWritetoFile(string answer)
+        public static void Choice(string answer)
         {
 
             if (answer == "v")
